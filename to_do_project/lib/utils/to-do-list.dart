@@ -6,10 +6,12 @@ class ToDoTile extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
   Function(bool?)? onChanged;
+  //Function(BuildContext)? delFunction;
 
    ToDoTile({super.key,
   required this.taskName, required this.taskCompleted,
-  required this.onChanged
+  required this.onChanged,
+   //required this.delFunction
   });
 
   @override
@@ -25,6 +27,12 @@ class ToDoTile extends StatelessWidget {
 
             //task name
             Text(taskName, style: TextStyle(decoration: taskCompleted?  TextDecoration.lineThrough: TextDecoration.none),),
+           Spacer(),
+          IconButton(onPressed: (){}
+          //delFunction!(context),
+          , icon: Icon(Icons.delete, color:Colors.red,)
+          
+          ),
           ],
         ),
         decoration: BoxDecoration(color: Colors.yellow, borderRadius: BorderRadius.circular(12)),

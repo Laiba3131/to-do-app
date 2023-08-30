@@ -41,9 +41,17 @@ class _HomePageState extends State<HomePage> {
   {
     setState(() {
       toDoList.add([_controller.text, false]);
+      _controller.clear();
     });
     Navigator.of(context).pop();
   }
+
+  // void deleteTask(int index)
+  // {
+  //   setState(() {
+  //     toDoList.removeAt(index);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +65,12 @@ class _HomePageState extends State<HomePage> {
         onPressed: (){
       createNewTask();
       }),
-      // body: ListView(children: [
-      //   ToDoTile(taskName: "Make List",taskCompleted: true,onChanged: (p0) {},),
-      //    ToDoTile(taskName: "Make something",taskCompleted: true,onChanged: (p0) {},),
-         
-      // ],),
-
       body: ListView.builder(
         itemCount: toDoList.length,
         itemBuilder: (context, index){
-       return ToDoTile(taskName: toDoList[index][0], taskCompleted: toDoList[index][1], onChanged: (value)=> CheckBoxChanged(value, index),);
+       return ToDoTile(taskName: toDoList[index][0], taskCompleted: toDoList[index][1], onChanged: (value)=> CheckBoxChanged(value, index), 
+      // delFunction: (context)=> deleteTask(index),
+       );
       }),
       
     );
