@@ -14,19 +14,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     // TODO: implement initState
+    // Preferences.saveItems(toDoList);
    // Preferences.saveItems(toDoList);
-   Preferences.saveItems(toDoList);
+
+   _controller= TextEditingController();
+   Preferences.getItems().then((data){
+    setState(() {
+      toDoList=data;
+    });
+   });
     super.initState();
   }
-  
-  final _controller= TextEditingController();
-  List toDoList=[
-     ["Make Tutorial", false],
-     ["Make Tutorial", false],
+
+  var _controller = TextEditingController();
+  List toDoList = [
+    ["Make Tutorial 1", false],
+    ["Make Tutorial 1", false],
   ];
 //   ToDoList = [
 //     {"Task": "Make Tutorial", "Completed": False},
@@ -35,37 +41,40 @@ class _HomePageState extends State<HomePage> {
 
   // check box was tapped
 
-
-  void CheckBoxChanged(bool? value, int index){
+  void CheckBoxChanged(bool? value, int index) {
     setState(() {
-      toDoList[index][1]= ! toDoList[index][1];
+      toDoList[index][1] = !toDoList[index][1];
+      //Preferences.saveItems(toDoList);
     });
   }
 
   // create a new task
-  void createNewTask()
-  {
-    showDialog(context: context, builder: (context){
-      return DialogBox( addNewTask: _controller, onSave: saveNewTask, onCancel: () => Navigator.of(context).pop(),);
-    });
+  void createNewTask() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return DialogBox(
+            addNewTask: _controller,
+            onSave: saveNewTask,
+            onCancel: () => Navigator.of(context).pop(),
+          );
+        });
   }
 
-  void saveNewTask()
-  {
+  void saveNewTask() {
     setState(() {
       toDoList.add([_controller.text, false]);
       _controller.clear();
-       Preferences.saveItems(toDoList);
-      //_saveToDoList();
+      Preferences.saveItems(toDoList);
+      Preferences.getItems();
     });
     Navigator.of(context).pop();
   }
 
-  void deleteTask(int index)
-  {
+  void deleteTask(int index) {
     setState(() {
       toDoList.removeAt(index);
-       Preferences.saveItems(toDoList);
+      Preferences.saveItems(toDoList);
       //_saveToDoList();
     });
   }
@@ -74,22 +83,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow[200],
-      appBar: AppBar(title: Text("TO DO"),
-      elevation: 0,
+      appBar: AppBar(
+        title: Text("TO DO"),
+        elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: (){
-      createNewTask();
-      }),
+          child: Icon(Icons.add),
+          onPressed: () {
+            createNewTask();
+          }),
       body: ListView.builder(
-        itemCount: toDoList.length,
-        itemBuilder: (context, index){
-       return ToDoTile(taskName: toDoList[index][0], taskCompleted: toDoList[index][1], onChanged: (value)=> CheckBoxChanged(value, index), 
-       deleteFunction: ()=> deleteTask(index),
-       );
-      }),
-      
+          itemCount: toDoList.length,
+          itemBuilder: (context, index) {
+            return ToDoTile(
+              taskName: toDoList[index][0],
+              taskCompleted: toDoList[index][1],
+              onChanged: (value) => CheckBoxChanged(value, index),
+              deleteFunction: () => deleteTask(index),
+            );
+          }),
     );
   }
 }

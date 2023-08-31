@@ -2,20 +2,18 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Preferences
-{
-  static saveItems(toDoList) async
-  {
-    var pref=await SharedPreferences.getInstance();
+class Preferences {
+  static saveItems(toDoList) async {
+    var pref = await SharedPreferences.getInstance();
     var savedList = toDoList.map((item) => item[0].toString()).toList();
     await pref.setStringList('toDoList', savedList);
     print("added");
-   
-  //   pref.setString("add", jsonEncode([
-  //   //  ["Make Tutorial", false],
-  //   //  ["Make Tutorial", false],
-  //   items
-  // ]));
+
+    //   pref.setString("add", jsonEncode([
+    //   //  ["Make Tutorial", false],
+    //   //  ["Make Tutorial", false],
+    //   items
+    // ]));
   }
 
 //   void _saveToDoList() {
@@ -23,12 +21,9 @@ class Preferences
 //   _prefs.setStringList(_prefsKey, savedList);
 // }
 
-
-
-   static getItems() async
-  {
-    var pref=await SharedPreferences.getInstance();
-     var savedList=pref.getStringList('toDoList');
+  static getItems() async {
+    var pref = await SharedPreferences.getInstance();
+    var savedList = pref.getStringList('toDoList');
     if (savedList != null) {
       return savedList.map((item) => [item, false]).toList();
     }
