@@ -18,21 +18,15 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     // Preferences.saveItems(toDoList);
-   // Preferences.saveItems(toDoList);
-
-   _controller= TextEditingController();
-   Preferences.getItems().then((data){
-    setState(() {
-      toDoList=data;
-    });
-   });
+    Preferences.saveItems(toDoList);
+    _controller= TextEditingController();
     super.initState();
   }
 
-  var _controller = TextEditingController();
+  TextEditingController _controller = TextEditingController();
   List toDoList = [
     ["Make Tutorial 1", false],
-    ["Make Tutorial 1", false],
+    ["Make Tutorial 2", false],
   ];
 //   ToDoList = [
 //     {"Task": "Make Tutorial", "Completed": False},
@@ -44,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   void CheckBoxChanged(bool? value, int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
-      //Preferences.saveItems(toDoList);
     });
   }
 
@@ -66,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       toDoList.add([_controller.text, false]);
       _controller.clear();
       Preferences.saveItems(toDoList);
-      Preferences.getItems();
+      //_saveToDoList();
     });
     Navigator.of(context).pop();
   }
