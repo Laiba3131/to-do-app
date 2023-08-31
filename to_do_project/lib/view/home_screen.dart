@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:to_do_project/utils/preferences.dart';
 
 import '../utils/dialog_box.dart';
 import '../utils/to-do-list.dart';
@@ -13,15 +14,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+   // Preferences.saveItems(toDoList);
+   Preferences.saveItems(toDoList);
+    super.initState();
+  }
   
   final _controller= TextEditingController();
-  //List of to do task
   List toDoList=[
      ["Make Tutorial", false],
      ["Make Tutorial", false],
   ];
+//   ToDoList = [
+//     {"Task": "Make Tutorial", "Completed": False},
+//     {"Task": "Write Report", "Completed": False},
+// ];
 
   // check box was tapped
+
 
   void CheckBoxChanged(bool? value, int index){
     setState(() {
@@ -42,6 +55,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       toDoList.add([_controller.text, false]);
       _controller.clear();
+       Preferences.saveItems(toDoList);
+      //_saveToDoList();
     });
     Navigator.of(context).pop();
   }
@@ -50,6 +65,8 @@ class _HomePageState extends State<HomePage> {
   {
     setState(() {
       toDoList.removeAt(index);
+       Preferences.saveItems(toDoList);
+      //_saveToDoList();
     });
   }
 
