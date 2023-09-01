@@ -1,21 +1,38 @@
-class SignUpModel {
-  String? message;
-  String? error;
-  int? statusCode;
+import 'package:flutter/cupertino.dart';
+import '../../model/signup_model.dart';
+import '../../utils/utils.dart';
+import '../services/api_manager.dart';
 
-  SignUpModel({this.message, this.error, this.statusCode});
+class SignupProvider extends ChangeNotifier{
+  bool isLoading = false;
 
-  SignUpModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    error = json['error'];
-    statusCode = json['statusCode'];
-  }
+  signup1(context, {name1, email1, password1})
+  async {
+    if(name1.isEmpty)
+    {
+      showSnackBar(context, Text("Please! Enter your name"));
+    }
+    else if(email1.isEmpty)
+    {
+      showSnackBar(context, Text("Please! Enter your email"));
+    }
+    else if(password1.isEmpty)
+    {
+      showSnackBar(context, Text("Please! Enter your password "));
+    }
+    else{
+      isLoading=true;
+      notifyListeners();
+     SignUpModel res= await ApiManager.signup(context, name1, email1, password1);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['error'] = this.error;
-    data['statusCode'] = this.statusCode;
-    return data;
+     if(res!= null)
+     {
+     // pushUntil(context, HomeScreen());
+      isLoading=false;
+      notifyListeners();
+     }
+
+    }
+
   }
 }
