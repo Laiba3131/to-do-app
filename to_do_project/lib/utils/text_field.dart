@@ -4,8 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class CustomTextField extends StatelessWidget {
-  var text, lable, isObsecure, controller;
-   CustomTextField ({this.text, this.lable, this.controller, this.isObsecure = false});
+  var text, lable, controller;
+   CustomTextField ({this.text, this.lable, this.controller });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class CustomTextField extends StatelessWidget {
         ),
         TextField(
           controller: controller,
-          obscureText: isObsecure,
           decoration: InputDecoration(
               hintText: lable,
               hintStyle: TextStyle(

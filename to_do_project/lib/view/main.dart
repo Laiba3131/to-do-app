@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_project/view/login_screen.dart';
 
 import 'home_screen.dart';
+import 'root_screen.dart';
 
 void main() {
 
@@ -8,6 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -17,9 +20,12 @@ class MyApp extends StatelessWidget {
       title: 'To-Do App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.blueGrey,
       ),
-      home:  HomePage(),
+      //home:  HomePage(),
+      //home: LoginScreen(),
+      home: RootScreen(),
+    
     );
   }
 }
