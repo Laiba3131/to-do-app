@@ -27,13 +27,18 @@ class _HomePageState extends State<HomePage>
   var tabController;
   @override
   void initState() {
-    // TODO: implement initState
-    // Preferences.saveItems(toDoList);
     Preferences.saveItems(toDoList);
     _controller = TextEditingController();
     tabController = TabController(length: 2, vsync: this);
+    initializeSharedPreferences();
     super.initState();
   }
+
+  
+Future<void> initializeSharedPreferences() async {
+  await Preferences.saveItems(toDoList);
+}
+
 
   void dispose() {
     tabController.dispose();
@@ -43,7 +48,7 @@ class _HomePageState extends State<HomePage>
   TextEditingController _controller = TextEditingController();
   List toDoList = [
     ["Make Tutorial 1", false],
-    ["Make Tutorial 2", false],
+    //["Make Tutorial 2", false],
   ];
 //   ToDoList = [
 //     {"Task": "Make Tutorial", "Completed": False},
@@ -71,13 +76,12 @@ class _HomePageState extends State<HomePage>
         });
   }
 
-  void saveNewTask() {
+  void saveNewTask() async {
     setState(() {
       toDoList.add([_controller.text, false]);
       _controller.clear();
-      Preferences.saveItems(toDoList);
-      //_saveToDoList();
     });
+     //await Preferences.saveItems(toDoList);
     Navigator.of(context).pop();
   }
 
@@ -95,16 +99,18 @@ class _HomePageState extends State<HomePage>
       backgroundColor: Colors.blueGrey[200],
       appBar: AppBar(
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
                 onPressed: () {
                   pop(context);
                 },
                 icon: Icon(
-                  Icons.arrow_back_ios,
+                  Icons.arrow_back,
                   color: Colors.white,
                 )),
             Text("TO DO"),
+             IconButton(onPressed: (){}, icon: Icon(Icons.more_vert)),
           ],
         ),
         elevation: 0,

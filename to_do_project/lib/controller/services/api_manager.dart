@@ -7,8 +7,6 @@ import 'package:http/http.dart' as http;
 import '../../model/login_model.dart';
 import '../../model/signup_model.dart';
 import '../../utils/utils.dart';
-import '../provider/login_provider.dart';
-import '../provider/signup_provider.dart';
 import 'endpoints.dart';
 
 class ApiManager {

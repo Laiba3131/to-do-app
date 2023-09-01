@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_project/view/login_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_project/view/profile_screen.dart';
 import '../controller/provider/login_provider.dart';
 import '../controller/provider/signup_provider.dart';
 import 'home_screen.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
         ),
         home: RootScreen(),
+       // home: ProfileScreen(),
+       // home: LoginScreen(),
       ),
     );
   }

@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:to_do_project/view/home_screen.dart';
 
+import 'profile_screen.dart';
+
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
 
@@ -15,16 +17,16 @@ class _RootScreenState extends State<RootScreen> {
 
    int selectedScreen = 2;
   var iconsList = [
-    Icons.home,
+    Icons.person,
     Icons.scanner,
-    Icons.shopping_basket,
-    Icons.card_giftcard,
-    Icons.star
+    Icons.home,
+    Icons.star,
+    Icons.settings
   ];
 
   
   var screensList = [
-    HomePage(),
+    ProfileScreen(),
     HomePage(),
     HomePage(),
     HomePage(),
@@ -32,11 +34,11 @@ class _RootScreenState extends State<RootScreen> {
   ];
 
   var textList=[
-   "Home",
+   "Profile",
    "Scan",
-   "Order",
+   "Home",
    "Gift",
-   "Offers",
+   "Settings",
   ];
 
 
