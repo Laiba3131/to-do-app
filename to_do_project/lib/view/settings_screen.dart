@@ -62,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: <Widget>[
             Text(
               'Notifications',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,fontFamily: "Poppins-Bold"),
             ),
             SwitchListTile(
               title: Text('Enable Notifications'),
@@ -83,7 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(height: 16.0),
             Text(
               'Theme',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,fontFamily: "Poppins-Bold"),
             ),
             // DropdownButton<String>(
             //   value: _selectedTheme,
