@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:to_do_project/view/home_screen.dart';
+import 'package:to_do_project/view/rating_screen.dart';
+import 'package:to_do_project/view/scan_screen.dart';
 
 import 'profile_screen.dart';
+import 'settings_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
@@ -27,17 +30,17 @@ class _RootScreenState extends State<RootScreen> {
   
   var screensList = [
     ProfileScreen(),
+    ScanScreen(),
     HomePage(),
-    HomePage(),
-    HomePage(),
-    HomePage()
+    AppRatingScreen(),
+    SettingsScreen(),
   ];
 
   var textList=[
    "Profile",
    "Scan",
    "Home",
-   "Gift",
+   "Rating",
    "Settings",
   ];
 

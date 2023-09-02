@@ -19,14 +19,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title:  Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-                onPressed: () {
-                  pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                )),
+            // IconButton(
+            //     onPressed: () {
+            //       pop(context);
+            //     },
+            //     icon: Icon(
+            //       Icons.arrow_back,
+            //       color: Colors.white,
+            //     )),
             Text("Profile Screen"),
             IconButton(onPressed: (){}, icon: Icon(Icons.more_vert)),
           ],
@@ -49,13 +49,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                fontFamily: "Poppins-Bold"
               ),
             ),
             SizedBox(height: 8),
             Text(
               'laibaazam.31@gmail.com', 
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18,fontFamily: "Poppins-Bold",
                 color: Colors.grey,
               ),
             ),

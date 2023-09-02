@@ -7,8 +7,6 @@ import '../controller/provider/signup_provider.dart';
 import 'home_screen.dart';
 import 'root_screen.dart';
 
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -29,9 +27,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
         ),
-        home: RootScreen(),
-       // home: ProfileScreen(),
-       // home: LoginScreen(),
+        home: LoginScreen(),
       ),
     );
   }

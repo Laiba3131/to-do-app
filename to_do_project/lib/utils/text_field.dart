@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
           style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w800,
-              fontFamily: "Roboto Regular",
+              fontFamily: "Poppins-Bold",
               decorationColor: Colors.black),
         ),
         TextField(
@@ -29,7 +29,7 @@ class CustomTextField extends StatelessWidget {
               hintStyle: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  fontFamily: "Roboto Regular",
+                  fontFamily: "Poppins-Bold",
                   decorationColor: Colors.black)),
         ),
         SizedBox(

@@ -26,19 +26,33 @@ class _HomePageState extends State<HomePage>
 
   var tabController;
   @override
+
+   List toDoList = [
+    {"Task": "Make Tutorial 1", "Completed": false},
+  ];
+
+
   void initState() {
     Preferences.saveItems(toDoList);
+    Preferences.getItems();
     _controller = TextEditingController();
     tabController = TabController(length: 2, vsync: this);
-    initializeSharedPreferences();
+     getData();
     super.initState();
   }
 
-  
-Future<void> initializeSharedPreferences() async {
-  await Preferences.saveItems(toDoList);
-}
-
+var itemData;
+   getData() async
+  {
+     var data= await Preferences.getItems();
+     if(data != null)
+     {
+      itemData= data;
+      setState(() {
+        
+      });
+     }
+  }
 
   void dispose() {
     tabController.dispose();
@@ -46,24 +60,14 @@ Future<void> initializeSharedPreferences() async {
   }
 
   TextEditingController _controller = TextEditingController();
-  List toDoList = [
-    ["Make Tutorial 1", false],
-    //["Make Tutorial 2", false],
-  ];
-//   ToDoList = [
-//     {"Task": "Make Tutorial", "Completed": False},
-//     {"Task": "Write Report", "Completed": False},
-// ];
-
-  // check box was tapped
-
+ 
   void CheckBoxChanged(bool? value, int index) {
     setState(() {
-      toDoList[index][1] = !toDoList[index][1];
+      toDoList[index]["Completed"] = !toDoList[index]["Completed"];
     });
   }
 
-  // create a new task
+ 
   void createNewTask() {
     showDialog(
         context: context,
@@ -78,19 +82,23 @@ Future<void> initializeSharedPreferences() async {
 
   void saveNewTask() async {
     setState(() {
-      toDoList.add([_controller.text, false]);
+      toDoList.add({"Task": _controller.text.toString(), "completed": false});
       _controller.clear();
     });
-     //await Preferences.saveItems(toDoList);
+    //await Preferences.saveItems(toDoList);
+    await Preferences.saveItems(itemData);
+    await Preferences.getItems();
     Navigator.of(context).pop();
   }
 
-  void deleteTask(int index) {
+  void deleteTask(int index)async {
     setState(() {
       toDoList.removeAt(index);
-      Preferences.saveItems(toDoList);
-      //_saveToDoList();
-    });
+      
+    }
+    );
+    await Preferences.saveItems(itemData);
+      Preferences.getItems();
   }
 
   @override
@@ -101,16 +109,16 @@ Future<void> initializeSharedPreferences() async {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-                onPressed: () {
-                  pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                )),
+            // IconButton(
+            //     onPressed: () {
+            //       pop(context);
+            //     },
+            //     icon: Icon(
+            //       Icons.arrow_back,
+            //       color: Colors.white,
+            //     )),
             Text("TO DO"),
-             IconButton(onPressed: (){}, icon: Icon(Icons.more_vert)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
           ],
         ),
         elevation: 0,
@@ -126,7 +134,7 @@ Future<void> initializeSharedPreferences() async {
               length: 2,
               child: TabBar(
                 controller: tabController,
-                labelStyle: TextStyle(fontSize: 15),
+                labelStyle: TextStyle(fontSize: 15, fontFamily: "Poppins-Bold"),
                 unselectedLabelColor: Colors.grey,
                 labelColor: Colors.white,
                 indicatorSize: TabBarIndicatorSize.label,
@@ -151,9 +159,10 @@ Future<void> initializeSharedPreferences() async {
                 child: ListView.builder(
                     itemCount: toDoList.length,
                     itemBuilder: (context, index) {
+                        final task = toDoList[index];
                       return ToDoTile(
-                        taskName: toDoList[index][0],
-                        taskCompleted: toDoList[index][1],
+                        taskName: task["Task"] ?? "",
+                            taskCompleted: false,
                         onChanged: (value) => CheckBoxChanged(value, index),
                         deleteFunction: () => deleteTask(index),
                         text:
@@ -166,10 +175,12 @@ Future<void> initializeSharedPreferences() async {
                 Center(
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 8.0),
-                    padding: EdgeInsets.symmetric(horizontal:8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
                     width: 200,
                     height: 40,
-                    decoration: BoxDecoration(border: Border.all(color: Colors.blueGrey, width: 2), borderRadius: BorderRadius.circular(5)),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueGrey, width: 2),
+                        borderRadius: BorderRadius.circular(5)),
                     child: Row(
                       children: [
                         Text("Add Date on your task"),
@@ -196,17 +207,6 @@ Future<void> initializeSharedPreferences() async {
                     firstDay: DateTime.utc(2023, 1, 1),
                     lastDay: DateTime.utc(2023, 12, 31),
                     focusedDay: _selectedDay,
-                    // focusedDay: _selectedDay,
-                    // calendarFormat: _calendarFormat,
-                    // onFormatChanged: (format) {
-                    //   setState(() {
-                    //     _calendarFormat = format;
-                    //   }
-                    //   );
-                    // },
-                    // onPageChanged: (focusedDay) {
-                    //   _selectedDay = focusedDay;
-                    // },
                     selectedDayPredicate: (day) {
                       return isSameDay(_selectedDay, day);
                     },
@@ -224,9 +224,13 @@ Future<void> initializeSharedPreferences() async {
                   child: ListView.builder(
                       itemCount: toDoList.length,
                       itemBuilder: (context, index) {
+                         final task = toDoList[index];
                         return ToDoTile(
-                            taskName: toDoList[index][0],
-                            taskCompleted: toDoList[index][1],
+                            // taskName: toDoList[index][0],
+                            // taskCompleted: toDoList[index][1],
+                            taskName: task["Task"] ?? "",
+                           taskCompleted: false,
+                           // taskCompleted: task["Completed"] ?? "",
                             onChanged: (value) => CheckBoxChanged(value, index),
                             deleteFunction: () => deleteTask(index),
                             text:

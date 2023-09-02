@@ -48,7 +48,7 @@ class ToDoTile extends StatelessWidget {
                           ? TextDecoration.lineThrough
                           : TextDecoration.none),
                 ),
-                Text(text,style: TextStyle(fontSize: 12),)
+                Text(text,style: TextStyle(fontSize: 12,fontFamily: "Poppins-Bold"),)
               ],
             ),
             Spacer(),
