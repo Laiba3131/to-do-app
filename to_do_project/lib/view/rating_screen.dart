@@ -31,7 +31,7 @@ class AppRatingScreen extends StatelessWidget {
           children: <Widget>[
             Text(
               'How would you rate our app?',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18,fontFamily: "Poppins-Bold"),
             ),
             SizedBox(height: 20),
             RatingBar.builder(

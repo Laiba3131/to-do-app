@@ -78,7 +78,7 @@ class _RootScreenState extends State<RootScreen> {
                               size: 35,
                               color: Colors.blueGrey,
                             ),
-                            Text(textList[i], style: TextStyle(color: Colors.blueGrey),),
+                            Text(textList[i], style: TextStyle(color: Colors.blueGrey,fontFamily: "Poppins-Bold"),),
                           ],
                         ),
                       )
