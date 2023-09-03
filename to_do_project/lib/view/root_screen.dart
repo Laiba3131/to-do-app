@@ -52,7 +52,7 @@ class _RootScreenState extends State<RootScreen> {
       body: screensList[selectedScreen],
 
             bottomNavigationBar: Container(
-              height: MediaQuery.of(context).size.height*0.08,
+              height: 70,
         color: Color.fromARGB(255, 235, 239, 232),
          padding: EdgeInsets.symmetric(vertical: 8),
          child: Row(

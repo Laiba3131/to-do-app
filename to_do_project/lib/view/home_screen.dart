@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -28,30 +30,25 @@ class _HomePageState extends State<HomePage>
   @override
 
    List toDoList = [
-    {"Task": "Make Tutorial 1", "Completed": false},
+    
   ];
 
 
   void initState() {
-    Preferences.saveItems(toDoList);
-    Preferences.getItems();
-    _controller = TextEditingController();
-    tabController = TabController(length: 2, vsync: this);
-     getData();
+    
+    getData();
     super.initState();
   }
 
-var itemData;
    getData() async
   {
-     var data= await Preferences.getItems();
-     if(data != null)
-     {
-      itemData= data;
-      setState(() {
-        
-      });
-     }
+
+    tabController = TabController(length: 2, vsync: this);
+     getData();
+    toDoList = await Preferences.getItems();
+     setState(() {
+       
+     });
   }
 
   void dispose() {
@@ -63,7 +60,9 @@ var itemData;
  
   void CheckBoxChanged(bool? value, int index) {
     setState(() {
-      toDoList[index]["Completed"] = !toDoList[index]["Completed"];
+      toDoList[index]["completed"] = !toDoList[index]["completed"];
+      Preferences.saveItems(toDoList);
+      getData();
     });
   }
 
@@ -86,7 +85,7 @@ var itemData;
       _controller.clear();
     });
     //await Preferences.saveItems(toDoList);
-    await Preferences.saveItems(itemData);
+    await Preferences.saveItems(toDoList);
     await Preferences.getItems();
     Navigator.of(context).pop();
   }
@@ -97,8 +96,8 @@ var itemData;
       
     }
     );
-    await Preferences.saveItems(itemData);
-      Preferences.getItems();
+    await Preferences.saveItems(toDoList);
+      getData();
   }
 
   @override
@@ -162,7 +161,7 @@ var itemData;
                         final task = toDoList[index];
                       return ToDoTile(
                         taskName: task["Task"] ?? "",
-                            taskCompleted: false,
+                            taskCompleted: task["completed"] ?? false,
                         onChanged: (value) => CheckBoxChanged(value, index),
                         deleteFunction: () => deleteTask(index),
                         text:

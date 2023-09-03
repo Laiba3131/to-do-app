@@ -16,7 +16,7 @@ class Preferences {
     var pref = await SharedPreferences.getInstance();
     var savedList = pref.getString('toDoList');
     if (savedList != null) {
-     jsonDecode(savedList);
+    return jsonDecode(savedList);
     }
     return [];
   }
