@@ -32,188 +32,204 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Padding(
+          body: Builder(
+            builder: (context) {
+              var provider = context.watch<SignupProvider>();
+              return provider.isLoading ? Center(child: CircularProgressIndicator.adaptive(),) 
+             :  Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Create account",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w800,
-                    fontFamily: "Poppins-Bold",
-                    color: Colors.blueGrey),
-              ),
-              SizedBox(
-                height: 7,
-              ),
-              Text(
-                "Sign up to continue",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Poppins-Bold",
-                    color: Colors.black),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              CustomTextField(
-                  text: "Full Name",
-                  lable: "Enter your Full Name",
-                  controller: nameController),
-              CustomTextField(
-                  text: "Email",
-                  lable: "Enter your Email ",
-                  controller: emailController),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Password",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: "Poppins-Bold",
-                          decorationColor: Colors.black),
-                    ),
-                    TextField(
-                      controller: passwordController,
-                      obscureText: show,
-                      decoration: InputDecoration(
-                        hintText: "Enter Password",
-                        hintStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Poppins-Bold",
-                            decorationColor: Colors.black),
-                        suffix: IconButton(
-                          onPressed: () {
-                            toggle();
-                          },
-                          icon: show == true
-                              ? Icon(
-                                  Icons.visibility_off,
-                                )
-                              : Icon(Icons.visibility),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Confirm Password",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: "Poppins-Bold",
-                          decorationColor: Colors.black),
-                    ),
-                    TextField(
-                      controller: ConfirmpasswordController,
-                      obscureText: show,
-                      decoration: InputDecoration(
-                        hintText: "Confirm Password",
-                        hintStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Poppins-Bold",
-                            decorationColor: Colors.black),
-                        suffix: IconButton(
-                          onPressed: () {
-                            toggle();
-                          },
-                          icon: show == true
-                              ? Icon(
-                                  Icons.visibility_off,
-                                )
-                              : Icon(Icons.visibility),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    )
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Forgot Password",
+                    "Create account",
                     style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: "Poppins-Bold",
+                        color: Colors.blueGrey),
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Text(
+                    "Sign up to continue",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Poppins-Bold",
+                        color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  CustomTextField(
+                      text: "Full Name",
+                      lable: "Enter your Full Name",
+                      controller: nameController),
+                  CustomTextField(
+                      text: "Email",
+                      lable: "Enter your Email ",
+                      controller: emailController),
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Password",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              fontFamily: "Poppins-Bold",
+                              decorationColor: Colors.black),
+                        ),
+                        TextField(
+                          controller: passwordController,
+                          obscureText: show,
+                          decoration: InputDecoration(
+                            hintText: "Enter Password",
+                            hintStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Poppins-Bold",
+                                decorationColor: Colors.black),
+                            suffix: IconButton(
+                              onPressed: () {
+                                toggle();
+                              },
+                              icon: show == true
+                                  ? Icon(
+                                      Icons.visibility_off,
+                                    )
+                                  : Icon(Icons.visibility),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Confirm Password",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              fontFamily: "Poppins-Bold",
+                              decorationColor: Colors.black),
+                        ),
+                        TextField(
+                          controller: ConfirmpasswordController,
+                          obscureText: show,
+                          decoration: InputDecoration(
+                            hintText: "Confirm Password",
+                            hintStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Poppins-Bold",
+                                decorationColor: Colors.black),
+                            suffix: IconButton(
+                              onPressed: () {
+                                toggle();
+                              },
+                              icon: show == true
+                                  ? Icon(
+                                      Icons.visibility_off,
+                                    )
+                                  : Icon(Icons.visibility),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Forgot Password",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15),
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                        color: Colors.blueGrey,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          // push(context, RootScreen());
+                           var provider = context.read<SignupProvider();
+                               provider.login1(context,email1: emailController.text, password1: passwordController.text);
+                              // var getInfo= Preference.getToken();
+                              //  if(getInfo!= null)
+                              //  {
+                              //   pushUntil(context, HomeScreen());
+                              //  }
+                              //  else{
+                              //   pushUntil(context, LoginScreen());
+                              //  }
+                        },
+                        child: Text(
+                          "Sign up",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      const Text("ALready have an account?"),
+                      TextButton(
+                        child: const Text(
+                          'Sign in',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          push(context, LoginScreen());
+                        },
+                      )
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
                   ),
                 ],
               ),
-              SizedBox(
-                height: 50,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15),
-                child: Container(
-                  height: 45,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7),
-                    color: Colors.blueGrey,
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      push(context, RootScreen());
-                    },
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: <Widget>[
-                  const Text("ALready have an account?"),
-                  TextButton(
-                    child: const Text(
-                      'Sign in',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.blueGrey,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {
-                      push(context, LoginScreen());
-                    },
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-            ],
-          ),
         ),
-      )),
+      );
+            }
+          )),
     );
   }
 }
